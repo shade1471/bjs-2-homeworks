@@ -20,6 +20,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
   let attention;
 
+  //Проверка на валидность данных
   if (isNaN(Number(percent))) {
     return attention = `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
   }
