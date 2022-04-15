@@ -1,10 +1,44 @@
 function Student(name, gender, age) {
-    // Ваш код
-
+  this.name = name;
+  this.gender = gender;
+  this.age = age;
 }
 
 Student.prototype.setSubject = function (subjectName) {
-  //ваш код
+  this.subject = subjectName;
 }
 
-// ваш код для остальных методов
+Student.prototype.addMark = function (mark) {
+  if (this.marks === undefined) {
+    this.marks = [mark];
+  } else {
+    this.marks.push(mark);
+  }
+}
+
+Student.prototype.addMarks = function (...mark) {
+  if (this.marks === undefined) {
+    this.marks = [mark[0]];
+    for (let i = 1; i < mark.length; i++) {
+      this.marks.push(mark[i]);
+    }
+  } else {
+    for (let elem of mark) {
+      this.marks.push(elem);
+    }
+  }
+}
+
+Student.prototype.getAverage = function () {
+  let summ = 0;
+  for (let mark of this.marks) {
+    summ += mark;
+  }
+  return (summ / this.marks.length);
+}
+
+Student.prototype.exclude = function (reason) {
+  delete this.subject;
+  delete this.marks;
+  this.excluded = reason;
+}
