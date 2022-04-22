@@ -145,12 +145,10 @@ class Subject {
     }
 
     addMark(value) {
-        if (value > 5) {
-            console.log("Ошибка, оценка должна быть числом от 1 до 5");
-        } else if (value < 1) {
-            console.log("Ошибка, оценка должна быть числом от 1 до 5");
+        if (value >= 1 && value <= 5) {
+            this.marks.push(value);
         } else {
-            this.marks.push(value)
+            console.log("Ошибка, оценка должна быть числом от 1 до 5");
         }
     }
 
