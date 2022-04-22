@@ -105,10 +105,10 @@ class Student {
     addMark(mark, subject) {
         if (this.disciplines.some(item => item.name === subject)) {
             let tmp = this.disciplines.find(item => item.name === subject);
-            tmp.marks = mark;
+            tmp.addMark(mark);
         } else {
             let newDiscipline = new Subject(subject);
-            newDiscipline.marks = mark;
+            newDiscipline.addMark(mark)
             this.disciplines.push(newDiscipline);
         }
     }
@@ -127,7 +127,7 @@ class Student {
         let sumTotal = 0;
         for (let item of this.disciplines) {
             sumTotal += item.getSumm();
-            count += item._marks.length;
+            count += item.marks.length;
         }
         return sumTotal / count;
     }
@@ -141,34 +141,30 @@ class Student {
 class Subject {
     constructor(name) {
         this.name = name;
-        this._marks = []
+        this.marks = []
     }
 
-    set marks(value) {
+    addMark(value) {
         if (value > 5) {
             console.log("Ошибка, оценка должна быть числом от 1 до 5");
         } else if (value < 1) {
             console.log("Ошибка, оценка должна быть числом от 1 до 5");
         } else {
-            this._marks.push(value)
+            this.marks.push(value)
         }
-    }
-
-    get marks() {
-        return this._marks;
     }
 
     getAverage() {
         let sum = 0;
-        for (let mark of this._marks) {
+        for (let mark of this.marks) {
             sum += mark;
         }
-        return sum / this._marks.length;
+        return sum / this.marks.length;
     }
 
     getSumm() {
         let sum = 0;
-        for (let mark of this._marks) {
+        for (let mark of this.marks) {
             sum += mark;
         }
         return sum;
