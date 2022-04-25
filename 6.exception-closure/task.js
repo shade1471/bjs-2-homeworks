@@ -17,22 +17,11 @@ function validateCount(value) {
 
 class Triangle {
     constructor(a, b, c) {
-        const noExistError = new Error('Треугольник с такими сторонами не существует');
-        if (a > b + c) {
-            throw noExistError;
+        if (a > b + c || b > a + c || c > a + b) {
+            throw new Error('Треугольник с такими сторонами не существует');
         } else {
             this.a = a;
-        }
-
-        if (b > a + c) {
-            throw noExistError;
-        } else {
             this.b = b;
-        }
-
-        if (c > a + b) {
-            throw noExistError;
-        } else {
             this.c = c;
         }
     }
