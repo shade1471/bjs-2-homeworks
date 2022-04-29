@@ -10,7 +10,6 @@ try {
     newAlarm.addClock(addMinute(15), () => console.log("Четвертый будильник без ID"));
 } catch (err) {
     console.log(err);
-} finally {
-    console.warn("Ниже прогон тест кейса")
-    testCase();
 }
+console.warn("Ниже прогон тест кейса")
+testCase();
