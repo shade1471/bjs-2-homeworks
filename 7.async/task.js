@@ -27,9 +27,9 @@ class AlarmClock {
     }
 
     start() {
-        let checkClock = (clock) => {
-            if (clock.time === this.getCurrentFormattedTime()) {
-                clock.callBack();
+        let checkClock = (timer) => {
+            if (timer.time === this.getCurrentFormattedTime()) {
+                timer.callBack();
             }
         }
         if (this.timerId === null) {
