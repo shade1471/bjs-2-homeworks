@@ -1,7 +1,16 @@
 // тут вы можете вызывать функции из task.js
-let budilnik = new AlarmClock();
-budilnik.addClock("16:45", () => console.log('Просыпайся'), 1);
-budilnik.addClock("17:45", () => console.log('Вставай!'), 2);
-budilnik.addClock("19:00", () => console.log('Вставай!'), 3);
-console.log(budilnik);
-budilnik.printAlarms();
+let newAlarm = new AlarmClock();
+console.warn("Проверка на добавление будильников с существующим ID и без него:")
+
+newAlarm.addClock(newAlarm.getCurrentFormattedTime, () => console.log("Первый будильник"), 1);
+newAlarm.addClock(addMinute(5), () => console.log("Второй будильник"), 2);
+newAlarm.addClock(addMinute(10), () => console.log("Третий будильник с существующим ID"), 2);
+
+try {
+    newAlarm.addClock(addMinute(15), () => console.log("Четвертый будильник без ID"));
+} catch (err) {
+    console.log(err);
+} finally {
+    console.warn("Ниже прогон тест кейса")
+    testCase();
+}

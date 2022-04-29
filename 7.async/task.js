@@ -46,12 +46,34 @@ class AlarmClock {
     }
 
     printAlarms() {
-        this.alarmCollection.forEach
-            (item => console.log(`Всего будильников ${this.alarmCollection.length} \nБудильник с идентификатором ${item.id} поставлен на ${item.time}`))
+        console.log(`Всего будильников ${this.alarmCollection.length}:`);
+        this.alarmCollection.forEach(item => console.log(`Будильник №${item.id} поставлен на ${item.time}`));
     }
 
     clearAlarms() {
         this.stop();
         this.alarmCollection = [];
     }
+}
+
+function testCase() {
+    let phoneAlarm = new AlarmClock();
+    phoneAlarm.addClock(phoneAlarm.getCurrentFormattedTime(), () => console.log('Просыпайся, ну пожалуйста!'), 1);
+
+    phoneAlarm.addClock(addMinute(1), () => { console.log('Вставай же!'); phoneAlarm.removeClock(2) }, 2);
+
+    phoneAlarm.addClock(addMinute(2), () => {
+        console.log('Это твой последний шанс!');
+        phoneAlarm.clearAlarms();
+        phoneAlarm.printAlarms();
+    }, 3);
+
+    phoneAlarm.printAlarms();
+    phoneAlarm.start();
+}
+
+function addMinute(min) {
+    let newTime = new Date();
+    newTime.setMinutes(newTime.getMinutes() + min);
+    return newTime.toLocaleTimeString("ru", { hour: "2-digit", minute: "2-digit" })
 }
