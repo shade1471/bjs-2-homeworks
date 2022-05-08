@@ -1,16 +1,17 @@
-const addThree = (a, b, c) => (a + b + c); 
+const addThree = (a, b, c) => (a + b + c);
 const upgradedAddThree = cachingDecoratorNew(addThree);
-upgradedAddThree(1, 2, 3); 
-upgradedAddThree(1, 2, 3); 
-upgradedAddThree(2, 2, 3); 
-upgradedAddThree(3, 2, 3); 
-upgradedAddThree(4, 2, 3); 
-upgradedAddThree(5, 2, 3); 
-upgradedAddThree(6, 2, 3); 
-upgradedAddThree(1, 2, 3); 
+upgradedAddThree(1, 2, 3);
+upgradedAddThree(1, 2, 3);
+upgradedAddThree(2, 2, 3);
+upgradedAddThree(3, 2, 3);
+upgradedAddThree(4, 2, 3);
+upgradedAddThree(5, 2, 3);
+upgradedAddThree(6, 2, 3);
+upgradedAddThree(1, 2, 3);
 
 const sendSignal = () => console.log("Сигнал отправлен");
-const upgradedSendSignal = debounceDecoratorNew(sendSignal, 2000);
+const upgradedSendSignal = debounceDecorator2(sendSignal, 2000);
+setTimeout(() => console.log("Количество вызовов функции - " + upgradedSendSignal.count), 8000);
 setTimeout(upgradedSendSignal); // Сигнал отправлен
 setTimeout(upgradedSendSignal, 300); // проигнорировано так как от последнего вызова прошло менее 2000мс (300 - 0 < 2000)
 setTimeout(upgradedSendSignal, 900); // проигнорировано так как времени от последнего вызова прошло: 900-300=600 (600 < 2000)

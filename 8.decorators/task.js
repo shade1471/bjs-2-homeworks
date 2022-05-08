@@ -24,31 +24,44 @@ function cachingDecoratorNew(func) {
 
 function debounceDecoratorNew(func, ms) {
   let timeout;
-  let flag;
+  let flag = false;
 
   return function (...args) {
-    // if (flag === undefined) {
-    //   func.apply(this, args);
-    //  
-    // }
-
     if (!flag) {
       func.apply(this, args);
-      flag = true;
     }
+
+    flag = true;
     clearTimeout(timeout);
 
-   
-
-
-    timeout = setTimeout(() => {
-      func.apply(this, args);
-      flag = false;
-    }, ms)
-
+    if (flag) {
+      timeout = setTimeout(() => {
+        func.apply(this, args);
+        flag = false;
+      }, ms)
+    }
   }
 }
 
-function debounceDecorator2(func) {
-  // Ваш код
+
+function debounceDecorator2(func, ms) {
+  let timeout;
+  let flag = false;
+  wrapper.count = 0;
+
+  function wrapper(...args) {
+    wrapper.count++;
+    if (!flag) {
+      func.apply(this, args);
+    }
+
+    flag = true;
+    clearTimeout(timeout);
+    
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+      flag = false;
+    }, ms);
+  }
+  return wrapper;
 }
